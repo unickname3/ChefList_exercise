@@ -161,7 +161,7 @@ class ShoppingList:
             self._add_item(ingredient)
 
     def __repr__(self):
-        return f"<Список покупок: {self.name}>"
+        return f"<Список покупок: {self.name}, в составе: {', '.join(map(str, self.items))}>"
 
 
 if __name__ == "__main__":
@@ -184,7 +184,9 @@ if __name__ == "__main__":
     print(eggs, sausage)
 
     list_to_ship = ShoppingList(test_user, "на недельку")
-    list_to_ship.add(eggs)
+    few_sausages = Ingredient(sausage, 12, th)
+    list_to_ship.add(few_sausages)
+    print(list_to_ship)
 
     time_to_result = RecipesTimer(1, 5)
     print(time_to_result)
