@@ -116,20 +116,23 @@ class RecipeCategory:
 
 
 class Recipe:
-    def __init__(self, user: User, name: str, recipe_category: RecipeCategory):
+    def __init__(
+        self,
+        user: User,
+        name: str,
+        recipe_category: RecipeCategory,
+        description: str,
+        ingredients: list[Ingredient],
+        timer: RecipesTimer,
+    ):
         self.master = user
         self.name = name
         self.category = recipe_category
-        self.created_at = datetime.now()
-        self.updated_at = self.created_at
-
-    def fill_recipe(
-        self, description: str, ingredients: list[Ingredient], timer: RecipesTimer
-    ):
         self.description = description
         self.timer = timer
         self.ingredients = ingredients
-        self.updated_at = datetime.now()
+        self.created_at = datetime.now()
+        self.updated_at = self.created_at
 
     def __repr__(self):
         return f"<Рецепт: {self.name}>"
@@ -194,16 +197,17 @@ if __name__ == "__main__":
     breakfast = RecipeCategory("завтрак", yellow)
     print(breakfast)
 
+    description = (
+        "нарезать сосиски, выложить на сковородку, залить яйцами, жарить до готовности"
+    )
     first_ingredient = Ingredient(eggs, 2, th)
     second_ingredient = Ingredient(sausage, 100, gr)
     print(first_ingredient, second_ingredient)
 
-    eggs_and_sausage = Recipe(test_user, "яичница", breakfast)
-
-    description = (
-        "нарезать сосиски, выложить на сковородку, залить яйцами, жарить до готовности"
-    )
-    eggs_and_sausage.fill_recipe(
+    eggs_and_sausage = Recipe(
+        test_user,
+        "яичница",
+        breakfast,
         description,
         ingredients=[first_ingredient, second_ingredient],
         timer=time_to_result,
