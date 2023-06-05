@@ -142,7 +142,7 @@ class ShoppingList:
     def __init__(self, user: User, name=""):
         self.master = user
         self.name = name
-        self.items = []
+        self.items: list[Ingredient] = []
         self.created_at = datetime.now()
         self.updated_at = self.created_at
 
